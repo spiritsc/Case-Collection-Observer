@@ -1,0 +1,1 @@
+require "case_collection_observer"

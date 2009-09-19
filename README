@@ -1,0 +1,139 @@
+== Case Collection Observer v. 0.1.0
+Simple notifier for object in HM and HABTM associations in AR...
+
+<b>Usage:</b>
+
+* Installation
+	sudo gem install case_collection_observer --source http://gems.github.com/
+	
+* Generator:
+
+	script/console case_observer OBSERVER_NAME MODELS_TO_OBSERVE [options]
+	
+	# options:
+		--skip-test => Skip all tests for observer
+	
+<b>Rails example:</b>
+
+- Simple construction with "has_many" association
+
+	# "Post" and "Comment" models
+		
+		class Post < ActiveRecord::Base
+			has_many_with_observer :comments
+		end
+		
+		class Comment < ActiveRecord::Base
+			belongs_to :post
+		end
+			
+	# simple "Blog" observer for "Post" model
+		
+		class BlogObserver < ActiveRecord::Observer
+			observe :post
+			
+			def before_save_comments(comment)
+			end
+			
+			def after_save_comments(comment)
+			end
+			
+			def before_destroy_comments(comment)
+			end
+			
+			def after_destroy_comments(comment)
+			end
+		end
+		
+- Simple construction with "has_many :through" association
+	
+	# "Post", "Category" and "Categorization" models
+		
+		class Post < ActiveRecord::Base
+			has_many :categorization
+			has_many_with_observer :categories, :through => :categorization
+		end
+		
+		class Category < ActiveRecord::Base
+			has_many :categorization
+			has_many_with_observer :posts, :through => :categorization
+		end
+		
+		class Categorization < ActiveRecord::Base
+			belongs_to :post
+			belongs_to :category
+		end
+		
+	# simple "Blog" observer for "Post" and "Category" models
+		
+		class BlogObserver < ActiveRecord::Observer
+			observe :post, :category
+			
+			def before_save_posts(post)
+			end
+			
+			def after_save_posts(post)
+			end
+			
+			def before_destroy_posts(post)
+			end
+			
+			def after_destroy_posts(post)
+			end
+			
+			def before_save_categories(category)
+			end
+			
+			def after_save_categories(category)
+			end
+			
+			def before_destroy_categories(category)
+			end
+			
+			def after_destroy_categories(category)
+			end
+		end 
+		
+- Simple construction with "has_and_belongs_to_many" association
+
+	# "Post", "Category" models and "categories_posts" table
+		
+		class Post < ActiveRecord::Base
+			has_and_belongs_to_many_with_observer :categories
+		end
+		
+		class Category < ActiveRecord::Base
+			has_and_belongs_to_many_with_observer :posts
+		end
+		
+	# simple "Blog" observer for "Post" and "Category" models
+		
+		class BlogObserver < ActiveRecord::Observer
+			observe :post, :category
+			
+			def before_save_posts(post)
+			end
+			
+			def after_save_posts(post)
+			end
+			
+			def before_destroy_posts(post)
+			end
+			
+			def after_destroy_posts(post)
+			end
+			
+			def before_save_categories(category)
+			end
+			
+			def after_save_categories(category)
+			end
+			
+			def before_destroy_categories(category)
+			end
+			
+			def after_destroy_categories(category)
+			end
+		end
+		
+Copyright © 2009 Szymon Czarnecki
