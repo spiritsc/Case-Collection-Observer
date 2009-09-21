@@ -26,8 +26,6 @@ module CaseCollectionObserver
           ["before_save_#{association_id}", "after_save_#{association_id}", 
            "before_destroy_#{association_id}", "after_destroy_#{association_id}"].each do |method|
              define_method method do |record|
-               puts "Jestem w:\nClass: #{self.class}\nObiekt-self: #{self}\nObiekt-metody: #{record}\n" + 
-                  "Metoda: #{method}(#{self.class})"
                self.class.changed
                self.class.notify_observers(method, record)
              end
