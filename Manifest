@@ -1,0 +1,14 @@
+CHANGELOG
+LICENSE
+Manifest
+README
+Rakefile
+generators/case_observer/USAGE
+generators/case_observer/case_observer_generator.rb
+generators/case_observer/templates/case_collection_observer.rb
+generators/case_observer/templates/case_collection_observer_test.rb
+init.rb
+lib/case_collection_observer.rb
+lib/case_collection_observer/base.rb
+lib/case_collection_observer/version.rb
+lib/casecollectionobserver.rb
