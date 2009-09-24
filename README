@@ -4,7 +4,7 @@ Simple notifier for object in HM and HABTM associations in AR...
 <b>Usage:</b>
 
 * Installation
-	sudo gem install case_collection_observer --source http://gems.github.com/
+	sudo gem install SpiritSC-case_collection_observer --source http://gems.github.com/
 	
 * Generator:
 
